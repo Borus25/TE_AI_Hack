@@ -1,3 +1,3 @@
-from auth import authentication
-from auth import User
+from auth import authentication, User
+
 user = authentication()
