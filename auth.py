@@ -2,6 +2,7 @@ from database import DatabaseManager
 from typing import Optional
 
 
+
 class User:
     def __init__(self, user_data: dict):
         self.first_name = user_data['first_name']
@@ -11,7 +12,9 @@ class User:
         self.is_active = user_data.get('is_active', True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} ({self.username})"
+        return (f"{self.first_name} {self.last_name}\n"
+                f"username: {self.username}\n"
+                f"email: {self.email}\n")
 
 
 class UserAuthenticator:
@@ -72,9 +75,6 @@ def authentication(db_config=None):
     # Используем основной метод authenticate
     user = authenticator.authenticate(first_name, last_name, email, username)
 
-    # Или альтернативный метод с курсором:
-    # user = authenticator.authenticate_with_cursor(first_name, last_name, email, username)
-
     if user is None:
         print("Проверьте данные")
         return None
@@ -91,6 +91,8 @@ if __name__ == "__main__":
         'password': 'postgres'
     }
 
-
     print("\n=== Аутентификация пользователя ===")
     user = authentication(db_config)
+
+    if user:
+        print(f"Добро пожаловать, {user}!")
