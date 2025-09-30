@@ -1,5 +1,5 @@
 from auth import authentication
-from smart_line import execute_prompt, create_sql_plan
+from smart_line import execute_prompt
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -22,8 +22,7 @@ if __name__ == "__main__":
         file_or_console = input("Введите: 'csv' или 'консоль'")
 
 
-    create_sql_plan(prompt, user)
-    if file_or_console:
+    if file_or_console == 'csv':
         output_file = input('Введите, куда сохранять?')
         execute_prompt(prompt, user, output_file)
     else:
